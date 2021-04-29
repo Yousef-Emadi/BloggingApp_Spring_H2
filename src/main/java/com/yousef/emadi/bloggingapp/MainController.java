@@ -19,7 +19,6 @@ public class MainController {
 
     //new objects
     private View view;
-
     @Autowired
     private PostRepository postRepository;
 
@@ -47,10 +46,10 @@ public class MainController {
         char response = 'n';
         do {
             Post newPost = view.getNewPost();
-            if (!isTitleNew(newPost.title)) {
-                view.messageRedundantTitle();
-                view.getNewPost();
-            };
+//            if (!isTitleNew(newPost.title)) {
+//                view.messageRedundantTitle();
+//                view.getNewPost();
+//            };
             if (newPost != null) {
                 postRepository.save(newPost);
                 response = view.askToContinue();

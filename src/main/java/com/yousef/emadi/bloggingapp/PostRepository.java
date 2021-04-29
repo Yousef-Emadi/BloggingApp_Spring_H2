@@ -11,4 +11,9 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface PostRepository extends CrudRepository<Post, Integer> {
+
+    boolean add(Post post);
+    Post findByTitle(String title);
+    Post findByKeyword(String keyword);
+    boolean deletePost(Post post);
 }

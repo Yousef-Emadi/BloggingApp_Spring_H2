@@ -27,12 +27,19 @@ public class BloggingAppApplication implements ApplicationContextAware {
         ctx = applicationContext;
     }
 
-
     public static void main(String[] args) {
         SpringApplication.run(BloggingAppApplication.class, args);
 
-        System.out.println("hello");
+        View view = new View();
+        PostRepository postRepository = new HibernateDB();
+        MainController controller = new MainController();
+        controller.Configure(view, postRepository);
 
+
+        while (true){
+
+            controller.mainController();
+        }
     }
 }
 
