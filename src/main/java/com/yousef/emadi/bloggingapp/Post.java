@@ -1,5 +1,10 @@
 package com.yousef.emadi.bloggingapp;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Project: Blogging App
  * For: Java III, Quiz 2, Practical
@@ -8,8 +13,11 @@ package com.yousef.emadi.bloggingapp;
  * Date: 29-APR-2021
  */
 
+@Entity
 public class Post {
     //Fields:
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     String title;
     String body;
