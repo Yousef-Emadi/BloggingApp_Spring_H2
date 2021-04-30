@@ -141,7 +141,6 @@ public class Controller {
             if (post.title.compareToIgnoreCase(title) == 0){
                 return false;
             }
-
         }
         return true;
     }

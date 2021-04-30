@@ -60,8 +60,6 @@ public class View {
     }
 
 
-
-
     public void showPost(Post post) {
         System.out.println(
                 "\n<< " + post.title + " >>\n" +
@@ -74,7 +72,6 @@ public class View {
 
     public void messageDone(){System.out.println("\n<<<<<   We are done!   >>>>>");}
     public void messageEmptyValue(){System.out.println("\n<<<<<   Sorry! Empty value is not acceptable   >>>>>");}
-
     public void messageRedundantTitle(){System.out.println("\n<<<<<   Sorry! This title already exists on the blog. Please try again and select a new title.   >>>>>");}
     public void messagePostNotFound(){  System.out.println("\n <<<<<   Post not found   >>>>>");}
     public void messageUpdatePost(Post oldPost){  System.out.println("\n <<<<<   Post with title:" + oldPost.title + " updated and stored in the blog. >>>>>");}
