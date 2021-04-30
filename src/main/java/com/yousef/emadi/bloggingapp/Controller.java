@@ -86,7 +86,7 @@ public class Controller {
         int counter = 0;
         for (Post post: iDataBase.list()
         ) {
-            if (post.body.contains(keyword) || post.title.contains(keyword)) {
+            if (containsIgnoreCase(post.body, keyword) || containsIgnoreCase(post.title, keyword)) {
                 view.showPost(post);
                 counter++;
             }
@@ -145,4 +145,7 @@ public class Controller {
         return true;
     }
 
+    public boolean containsIgnoreCase(String text, String keyword) {
+        return text.toLowerCase().contains(keyword.toLowerCase());
+    }
 }
