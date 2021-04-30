@@ -35,7 +35,7 @@ public class View {
 
 
     public Post getNewPost() {
-        System.out.print("Press \"Enter\" to go to the next step\n");input.nextLine(); //to consume left-over line after nextInt
+//        System.out.print("Press \"Enter\" to go to the next step\n");input.nextLine(); //to consume left-over line after nextInt
         System.out.print("Please enter a new title: ");
         String title = input.nextLine();
 
@@ -76,11 +76,11 @@ public class View {
     }
 
     //Messages
-    public void messageDone(){System.out.println("We all done!");}
-    public void messageRedundantTitle(){System.out.println("Title is already exist on the blog. select a new title!");}
+    public void messageDone(){System.out.println("\nWe all done!");}
+    public void messageRedundantTitle(){System.out.println("\nTitle is already exist on the blog. select a new title!");}
     public void messagePostNotFound(){  System.out.println("\n <<<<<   Post not found   >>>>>");}
     public void messageUpdatePost(Post oldPost){  System.out.println("\n <<<<<   Post with title:" + oldPost.title + " updated and stored in the blog. >>>>>");}
-    public void messageExit() {System.out.println("<<<<<   Thank you and have a nice Blog! :)  >>>>> \n" );}
+    public void messageExit() {System.out.println("\n<<<<<   Thank you and have a nice Blog! :)  >>>>> \n" );}
 
 
     // Method to get number from user and handles InputMismatchException and logical expressions

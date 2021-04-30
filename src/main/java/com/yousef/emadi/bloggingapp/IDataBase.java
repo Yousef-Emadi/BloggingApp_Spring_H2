@@ -10,6 +10,9 @@ import org.springframework.data.repository.CrudRepository;
  * Date: 29-APR-2021
  */
 
+public interface IDataBase{
 
-public interface PostRepository extends CrudRepository<Post, Integer> {
+    void add(Post post);
+    Iterable<Post> list();
+    void delete(Post post);
 }

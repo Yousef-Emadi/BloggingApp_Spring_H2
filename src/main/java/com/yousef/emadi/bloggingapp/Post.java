@@ -27,6 +27,7 @@ public class Post {
     }
 
     public Post(String title, String body) {
+        this.id = 0;
         this.title = title;
         this.body = body;
     }

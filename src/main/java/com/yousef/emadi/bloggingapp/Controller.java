@@ -1,11 +1,5 @@
 package com.yousef.emadi.bloggingapp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
-
 /**
  * Project: Blogging App
  * For: Java III, Quiz 2, Practical
@@ -14,19 +8,16 @@ import java.util.Optional;
  * Date: 29-APR-2021
  */
 
-@Controller
-public class MainController {
+public class Controller {
 
     //new objects
     private View view;
-    @Autowired
-    private PostRepository postRepository;
+    private IDataBase iDataBase;
 
-    public void Configure(View view, PostRepository postRepository) {
+    public void Configure(View view, IDataBase iDataBase) {
         this.view = view;
-        this.postRepository = postRepository;
+        this.iDataBase = iDataBase;
     }
-
 
 
     public void mainController(){
@@ -42,25 +33,24 @@ public class MainController {
         }
     }
 
+    /////////////////// so far
     private void doAdd() {
         char response = 'n';
         do {
             Post newPost = view.getNewPost();
-//            if (!isTitleNew(newPost.title)) {
-//                view.messageRedundantTitle();
-//                view.getNewPost();
-//            };
-            if (newPost != null) {
-                postRepository.save(newPost);
-                response = view.askToContinue();
-            }
+            if (!isTitleNew(newPost.title)) {
+                view.messageRedundantTitle();
+                return;
+            };
+            iDataBase.add(newPost);
+            response = view.askToContinue();
         }
         while ( response == 'y' );
         view.messageDone();
     }
 
     private void doList() {
-        for (Post post: postRepository.findAll()
+        for (Post post: iDataBase.list()
              ) {
             view.showPost(post);
         }
@@ -69,19 +59,21 @@ public class MainController {
     private void doFindByTitle() {
         String title = view.getTitle();
         int counter = 0;
-        for (Post post: postRepository.findAll()
+        for (Post post: iDataBase.list()
         ) {
             if (post.title == title)
             view.showPost(post);
             counter++;
+            System.out.println("inside: "+ title);
         }
         if (counter == 0) view.messagePostNotFound();
+        System.out.println("outside: "+title + counter);
     }
 
     private void doFindByKeyword() {
         String keyword = view.getKeyword();
         int counter = 0;
-        for (Post post: postRepository.findAll()
+        for (Post post: iDataBase.list()
         ) {
             if (post.body.contains(keyword) || post.title.contains(keyword))
                 view.showPost(post);
@@ -91,16 +83,28 @@ public class MainController {
     }
 
     private void doUpdate() {
-        System.out.println("(to be developed)");
+        String title = view.getTitle();
+        int counter = 0;
+        for (Post post: iDataBase.list()
+        ) {
+            if (post.title == title){
+                doAdd();
+                iDataBase.delete(post);
+                view.messageDone();
+                counter++;
+            }
+        }
+        if (counter == 0) view.messagePostNotFound();
+
     }
 
     private void doDelete() {
         String title = view.getTitle();
         int counter = 0;
-        for (Post post: postRepository.findAll()
+        for (Post post: iDataBase.list()
         ) {
             if (post.title == title){
-                postRepository.delete(post);
+                iDataBase.delete(post);
                 view.messageDone();
                 counter++;
             }
@@ -117,7 +121,7 @@ public class MainController {
 
 
     public boolean isTitleNew(String title){
-        for (Post post: postRepository.findAll()
+        for (Post post: iDataBase.list()
         ) {
             if (post.title == title)
             return false;
