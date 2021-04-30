@@ -34,21 +34,21 @@ public class View {
     }
 
 
-    public Post getNewPost() {
-//        System.out.print("Press \"Enter\" to go to the next step\n");input.nextLine(); //to consume left-over line after nextInt
-        System.out.print("Please enter a new title: ");
+    public String getTitle(){
+        System.out.print("Please enter the title: ");
         String title = input.nextLine();
-
-        System.out.print("Please start entering the post body: ");
-        String body = input.nextLine();
-
-        Post post = new Post(title, body);
-
-        return post;
+        return title;
     }
 
+    public String getBody(){
+        System.out.print("Please enter the post body: ");
+        String body = input.nextLine();
+        return body;
+    }
+
+
     public char askToContinue(){
-        System.out.print("Would you like to write another post? (y/n)");
+        System.out.print("\nWould you like to write another post? (y/n)");
         char c = input.next().charAt(0);
         return c;
     }
@@ -59,25 +59,23 @@ public class View {
         return keyword;
     }
 
-    public String getTitle() {
-        System.out.print("\nPlease enter title to find the post: ");
-        String title = input.nextLine();
-        return title;
-    }
+
 
 
     public void showPost(Post post) {
         System.out.println(
-                "\nid: " + post.id +
-                        "\n<< " + post.title + " >>\n" +
+                "\n<< " + post.title + " >>\n" +
                         post.body+
                         "\n------------------------------------------------------------------"
         );
     }
 
     //Messages
-    public void messageDone(){System.out.println("\nWe all done!");}
-    public void messageRedundantTitle(){System.out.println("\nTitle is already exist on the blog. select a new title!");}
+
+    public void messageDone(){System.out.println("\n<<<<<   We are done!   >>>>>");}
+    public void messageEmptyValue(){System.out.println("\n<<<<<   Sorry! Empty value is not acceptable   >>>>>");}
+
+    public void messageRedundantTitle(){System.out.println("\n<<<<<   Sorry! This title already exists on the blog. Please try again and select a new title.   >>>>>");}
     public void messagePostNotFound(){  System.out.println("\n <<<<<   Post not found   >>>>>");}
     public void messageUpdatePost(Post oldPost){  System.out.println("\n <<<<<   Post with title:" + oldPost.title + " updated and stored in the blog. >>>>>");}
     public void messageExit() {System.out.println("\n<<<<<   Thank you and have a nice Blog! :)  >>>>> \n" );}
@@ -112,6 +110,12 @@ public class View {
                 continue;
             } // end catch
     } // end method getNumberFromUser
+
+    //to consume left-over line after nextInt
+    public void leftOverConsumer(){
+        System.out.print("\n");
+        input.nextLine();
+    }
 
 
 }

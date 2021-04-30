@@ -33,19 +33,31 @@ public class Controller {
         }
     }
 
-    /////////////////// so far
+
     private void doAdd() {
-        char response = 'n';
-        do {
-            Post newPost = view.getNewPost();
-            if (!isTitleNew(newPost.title)) {
+        char response = 'y';
+        while ( response == 'y'){
+            String title = view.getTitle();
+            if (title.isBlank() || title == null) {
+                view.messageEmptyValue();
+                return;
+            }
+            if (!isTitleNew(title)) {
                 view.messageRedundantTitle();
                 return;
-            };
+            }
+
+            String body = view.getBody();
+            if (body.isBlank() || body == null) {
+                view.messageEmptyValue();
+                return;
+            }
+
+            Post newPost = new Post (title, body);
             iDataBase.add(newPost);
             response = view.askToContinue();
+            view.leftOverConsumer();
         }
-        while ( response == 'y' );
         view.messageDone();
     }
 
@@ -61,13 +73,12 @@ public class Controller {
         int counter = 0;
         for (Post post: iDataBase.list()
         ) {
-            if (post.title == title)
-            view.showPost(post);
-            counter++;
-            System.out.println("inside: "+ title);
+            if (post.title.compareToIgnoreCase(title) == 0) {
+                view.showPost(post);
+                counter++;
+            }
         }
         if (counter == 0) view.messagePostNotFound();
-        System.out.println("outside: "+title + counter);
     }
 
     private void doFindByKeyword() {
@@ -75,9 +86,10 @@ public class Controller {
         int counter = 0;
         for (Post post: iDataBase.list()
         ) {
-            if (post.body.contains(keyword) || post.title.contains(keyword))
+            if (post.body.contains(keyword) || post.title.contains(keyword)) {
                 view.showPost(post);
-            counter++;
+                counter++;
+            }
         }
         if (counter == 0) view.messagePostNotFound();
     }
@@ -87,11 +99,15 @@ public class Controller {
         int counter = 0;
         for (Post post: iDataBase.list()
         ) {
-            if (post.title == title){
-                doAdd();
+            if (post.title.compareToIgnoreCase(title) == 0){
+                String newTitle = post.title;
+                String newBody = view.getBody();
                 iDataBase.delete(post);
+                Post newPost = new Post (newTitle, newBody);
+                iDataBase.add(newPost);
                 view.messageDone();
                 counter++;
+                return;
             }
         }
         if (counter == 0) view.messagePostNotFound();
@@ -103,7 +119,7 @@ public class Controller {
         int counter = 0;
         for (Post post: iDataBase.list()
         ) {
-            if (post.title == title){
+            if (post.title.compareToIgnoreCase(title) == 0){
                 iDataBase.delete(post);
                 view.messageDone();
                 counter++;
@@ -119,58 +135,15 @@ public class Controller {
     }
 
 
-
     public boolean isTitleNew(String title){
         for (Post post: iDataBase.list()
         ) {
-            if (post.title == title)
-            return false;
+            if (post.title.compareToIgnoreCase(title) == 0){
+                return false;
+            }
+
         }
         return true;
-
     }
 
 }
-//
-//
-//    private void doFindAndShowMember() {
-//        int id = myUI.getIdToSearch();
-//        Member foundMember = members.findMember(id);
-//        if (foundMember != null)
-//            myUI.showMemberVerticalStyle(foundMember);
-//        else
-//            myUI.memberNotFoundMessage();
-//    }
-
-//
-//    private void doListMembers() {
-//        members.listMember().forEach(member -> myUI.showMemberLineStyle(member));
-//    }
-//
-//    private void doUpdateMember() {
-//        int id = myUI.getIdToSearch();
-//        Member oldMember = members.findMember(id);
-//        if (oldMember != null){
-//            Member newMember = myUI.getNewMember();
-//            members.addMember(newMember);
-//            members.removeMember(oldMember);
-//            myUI.updateMemberMessage(oldMember, newMember);
-//        }
-//        else
-//            myUI.memberNotFoundMessage();
-//    }
-//
-//
-//    private void doRemoveMember() {
-//        int id = myUI.getIdToSearch();
-//        Member foundMember = members.findMember(id);
-//        if (foundMember != null){
-//            members.removeMember(foundMember);
-//            myUI.memberRemovedMessage(foundMember);
-//        }
-//        else
-//            myUI.memberNotFoundMessage();
-//
-//    }
-
-
