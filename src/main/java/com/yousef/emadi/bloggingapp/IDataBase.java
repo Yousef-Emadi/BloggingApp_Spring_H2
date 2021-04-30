@@ -15,4 +15,5 @@ public interface IDataBase{
     void add(Post post);
     Iterable<Post> list();
     void delete(Post post);
+
 }

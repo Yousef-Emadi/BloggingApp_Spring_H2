@@ -13,7 +13,7 @@ public class HibernateDB implements IDataBase {
     //Fields:
     private PostRepository postRepository = BloggingAppApplication.ctx.getBean(PostRepository.class);
 
-
+    //Methods
     @Override
     public void add(Post post) {
         if (post != null) postRepository.save(post);

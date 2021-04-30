@@ -30,11 +30,14 @@ public class BloggingAppApplication implements ApplicationContextAware {
     public static void main(String[] args) {
         SpringApplication.run(BloggingAppApplication.class, args);
 
+        //Objects:
         View view = new View();
         IDataBase hibernateDB = new HibernateDB();
         Controller controller = new Controller();
         controller.Configure(view, hibernateDB);
 
+
+        //Permanent App Menu
         while (true){
             controller.mainController();
         }

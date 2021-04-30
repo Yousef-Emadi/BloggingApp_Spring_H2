@@ -14,10 +14,12 @@ public class Controller {
     private View view;
     private IDataBase iDataBase;
 
+    //Configurator
     public void Configure(View view, IDataBase iDataBase) {
         this.view = view;
         this.iDataBase = iDataBase;
     }
+
 
 
     public void mainController(){
@@ -32,6 +34,8 @@ public class Controller {
             case 0 -> {doExit();}
         }
     }
+
+
 
 
     private void doAdd() {

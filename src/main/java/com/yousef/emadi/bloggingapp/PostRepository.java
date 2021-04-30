@@ -10,6 +10,5 @@ import org.springframework.data.repository.CrudRepository;
  * Date: 29-APR-2021
  */
 
-
 public interface PostRepository extends CrudRepository<Post, Integer> {
 }

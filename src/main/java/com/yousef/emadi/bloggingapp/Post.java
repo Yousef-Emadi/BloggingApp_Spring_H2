@@ -26,6 +26,7 @@ public class Post {
     public Post() {
     }
 
+    //id is auto
     public Post(String title, String body) {
         this.id = 0;
         this.title = title;

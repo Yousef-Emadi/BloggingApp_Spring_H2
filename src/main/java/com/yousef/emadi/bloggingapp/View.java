@@ -69,7 +69,6 @@ public class View {
     }
 
     //Messages
-
     public void messageDone(){System.out.println("\n<<<<<   We are done!   >>>>>");}
     public void messageEmptyValue(){System.out.println("\n<<<<<   Sorry! Empty value is not acceptable   >>>>>");}
     public void messageRedundantTitle(){System.out.println("\n<<<<<   Sorry! This title already exists on the blog. Please try again and select a new title.   >>>>>");}
